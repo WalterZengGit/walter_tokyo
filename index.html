@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Walter_Tokyo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #000;
+      font-family: 'Inter', sans-serif;
+      color: #fff;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+    }
+    .hero {
+      background: url('https://i.postimg.cc/9MDFFNgM/2025-04-01-181021.png') no-repeat center center/cover;
+      border-radius: 16px;
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+    }
+    .title-overlay {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 1rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      max-width: 100%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 150px;
+      background: linear-gradient(to top, #000, transparent);
+      left: 0;
+      z-index: 0;
+    }
+    .hero h1, .hero .subtitle span {
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+    }
+    .hero h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    .hero h1 .dot {
+      display: inline;
+    }
+    .subtitle {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      margin-top: 0.5rem;
+      flex-direction: row;
+    }
+    .subtitle span {
+      color: #ccc;
+    }
+    .subtitle span::after {
+      content: '｜';
+      margin-left: 0.5rem;
+      color: #555;
+    }
+    .subtitle span:last-child::after {
+      content: '';
+      margin: 0;
+    }
+    @media (max-width: 768px) {
+      .hero h1 {
+        flex-direction: column;
+      }
+      .hero h1 .dot {
+        display: none;
+      }
+      .subtitle {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+      }
+      .subtitle span::after {
+        content: '';
+      }
+    }
+    .socials {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      z-index: 1;
+      position: relative;
+      flex-wrap: wrap;
+    }
+    .social-icon {
+      color: #fff;
+      font-size: 1.2rem;
+      width: 42px;
+      height: 42px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .social-icon:hover {
+      background: #fff;
+      color: #000;
+      transform: translateY(-2px);
+    }
+    .section {
+      background-color: #111;
+      border: 1px solid #444;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      transition: transform 0.3s ease;
+    }
+    .section:hover {
+      transform: translateY(-4px);
+    }
+    .section h3 {
+      color: #fff;
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .section p {
+      color: #ccc;
+      margin: 0.5rem 0 1rem;
+    }
+    .button {
+      background: #fff;
+      color: #000;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+    .button:hover {
+      background: #ccc;
+      color: #000;
+      transform: scale(1.05);
+    }
+    .footer-contact {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+    .footer-contact i {
+      margin-right: 0.5rem;
+      color: #fff;
+    }
+    .footer-contact a {
+      color: #ccc;
+      text-decoration: underline;
+    }
+    .lang-switcher {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 10;
+    }
+    .lang-btn {
+      background: #222;
+      color: #fff;
+      border: 1px solid #555;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+    }
+    .lang-btn:hover {
+      background: #fff;
+      color: #000;
+    }
+    @media (max-width: 768px) {
+      .lang-switcher {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="lang-switcher">
+      <button class="lang-btn" onclick="changeLang('en')">English</button>
+      <button class="lang-btn" onclick="changeLang('zh')">中文</button>
+      <button class="lang-btn" onclick="changeLang('jp')">日本語</button>
+    </div>
+    <div class="hero">
+      <div class="title-overlay">
+        <h1><span>Walter</span><span class="dot"> ． </span><span>EverAI</span></h1>
+        <div class="subtitle">
+          <span data-i18n="subtitle1">GCP & RPA Specialist</span>
+          <span data-i18n="subtitle2">AI Automation Advocate</span>
+          <span data-i18n="subtitle3">Based in Tokyo</span>
+        </div>
+      </div>
+      <div class="socials">
+        <a href="https://www.dankopeng.com" target="_blank" class="social-icon">
+          <i class="fas fa-home"></i>
+        </a>
+        <a href="https://www.tiktok.com/@walter_tokyo" target="_blank" class="social-icon">
+          <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="https://www.facebook.com/waltertokyoai" target="_blank" class="social-icon">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/walter_tokyo" target="_blank" class="social-icon">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://youtube.com/@walter_tokyo" target="_blank" class="social-icon">
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://www.threads.net/@walter_tokyo" target="_blank" class="social-icon">
+          <i class="fa-brands fa-threads"></i>
+        </a>
+        <a href="https://x.com/walter_tokyo" target="_blank" class="social-icon">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+        <a href="https://github.com/WalterZengGit" target="_blank" class="social-icon">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 data-i18n="title1">LLM & ML Starter Pack — $9.9 Community Deal</h3>
+      <p data-i18n="desc1">These resources bundle helps you go from AI curious to AI capable. Learn the tech behind the tools — fast, practical, and affordable.</p>
+      <a href="#" class="button" data-i18n="button1">Grab the Pack</a>
+    </div>
+
+    <div class="section">
+      <h3 data-i18n="title2">Free Guide: 12 Lessons to Jumpstart Your AI Journey</h3>
+      <p data-i18n="desc2">Get my 12-lesson starter pack (worth $39) and see how creators, solo founders, and marketers are leveling up — free for a limited time.</p>
+      <a href="https://www.dankopeng.com/newsletter" class="button" data-i18n="button2">Send to me</a>
+    </div>
+
+    <div class="section">
+      <h3 data-i18n="title3">My AI Recording Blog</h3>
+      <p data-i18n="desc3">After years of writing code, this space is where I explore AI, share experiments, and think out loud.</p>
+      <a href="https://www.dankopeng.com/index_zh" class="button" data-i18n="button3">Check it out</a>
+    </div>
+
+    <div class="footer-contact">
+      <i class="fas fa-envelope"></i>
+      <span data-i18n="contact">Feel free to contact me via email</span>
+      <a href="mailto:oversurpa@gmail.com">oversurpa@gmail.com</a>
+    </div>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        subtitle1: "GCP & RPA Specialist",
+        subtitle2: "AI Automation Advocate",
+        subtitle3: "Based in Tokyo",
+        title1: "LLM & ML Starter Pack — $9.9 Community Deal",
+        desc1: "These resources bundle helps you go from AI curious to AI capable. Learn the tech behind the tools — fast, practical, and affordable.",
+        button1: "Grab the Pack",
+        title2: "Free Guide: 12 Lessons to Jumpstart Your AI Journey",
+        desc2: "Get my 12-lesson starter pack (worth $39) and see how creators, solo founders, and marketers are leveling up — free for a limited time.",
+        button2: "Send to me",
+        title3: "My AI Recording Blog",
+        desc3: "After years of writing code, this space is where I explore AI, share experiments, and think out loud.",
+        button3: "Check it out",
+        contact: "Feel free to contact me via email"
+      },
+      zh: {
+        subtitle1: "GCP & RPA 技術顧問",
+        subtitle2: "AI 自動化實踐家",
+        subtitle3: "人在東京 🍜",
+        title1: "LLM & 機器學習技術精華包 — 社群價格 $9.9",
+        desc1: "專為 AI 進階學習，從觀念、技術到應用，快速建立你的 AI 技能地圖。",
+        button1: "立即領取",
+        title2: "限時免費：AI 入門必修的12 堂課",
+        desc2: "價值 $39 的 AI 實戰課程，幫助你有效入門、打好基礎，適合創作者與開發者，目前免費提供。",
+        button2: "免費索取",
+        title3: "我的 AI 部落格",
+        desc3: "十多年的coding經驗，在這裡我整理我的 AI 研究與應用心得，紀錄這趟持續進化的旅程。",
+        button3: "立即閱讀",
+        contact: "歡迎來信洽談合作"
+      },
+      jp: {
+        subtitle1: "GCPおよびRPAのスペシャリスト",
+        subtitle2: "AI自動化の実践者",
+        subtitle3: "東京在住",
+        title1: "LLM＆MLスターターパック — コミュニティ特価 $9.9",
+        desc1: "AIの基礎から応用まで、必要な知識を短時間で習得できる実用的なパッケージです。",
+        button1: "今すぐダウンロード",
+        title2: "無料ガイド：AIの基礎を学ぶ12のレッスン",
+        desc2: "通常価格$39の入門レッスンを、期間限定で無料提供中。クリエイターや個人開発者に最適です。",
+        button2: "メールで受け取る",
+        title3: "私のAI記録ノート",
+        desc3: "長年の開発経験をもとに、AIに関する実験や考察を記録・共有しています。",
+        button3: "チェックする",
+        contact: "ご連絡はメールにてお気軽にどうぞ"
+      }
+    };
+
+    function changeLang(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          el.innerText = translations[lang][key];
+        }
+      });
+    }
+  </script>
+</body>
+</html>
