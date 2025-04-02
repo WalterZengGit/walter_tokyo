@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscribe - Walter.EverAI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #000;
+      font-family: 'Inter', sans-serif;
+      color: #fff;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+    }
+    .hero {
+      background: url('https://i.postimg.cc/9MDFFNgM/2025-04-01-181021.png') no-repeat center center/cover;
+      border-radius: 16px;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    .title-overlay {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      max-width: 100%;
+      z-index: 1;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 150px;
+      background: linear-gradient(to top, #000, transparent);
+      left: 0;
+      z-index: 0;
+    }
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+      margin-bottom: 1rem;
+    }
+    .title-overlay p {
+      font-size: 1.1rem;
+      color: #ccc;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .form-container {
+      background-color: #111;
+      border: 1px solid #444;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      transition: transform 0.3s ease;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #fff;
+      font-weight: 600;
+    }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #444;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+    }
+    .form-group input:focus, .form-group select:focus {
+      outline: none;
+      border-color: #666;
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .form-group select option {
+      background: #111;
+      color: #fff;
+    }
+    .button {
+      background: #fff;
+      color: #000;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      width: 100%;
+      cursor: pointer;
+    }
+    .button:hover {
+      background: #ccc;
+      transform: scale(1.05);
+    }
+    .lang-switcher {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 10;
+    }
+    .lang-btn {
+      background: #222;
+      color: #fff;
+      border: 1px solid #555;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+    }
+    .lang-btn:hover {
+      background: #fff;
+      color: #000;
+    }
+    .footer-contact {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+    .footer-contact i {
+      margin-right: 0.5rem;
+      color: #fff;
+    }
+    .footer-contact a {
+      color: #ccc;
+      text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+      .lang-switcher {
+        top: 1rem;
+        left: 1rem;
+      }
+      .hero {
+        min-height: 250px;
+      }
+      .back-button {
+        top: 1rem;
+      }
+      .back-button-content {
+        padding: 0.6rem 1rem;
+      }
+      .title-overlay {
+        margin-top: 2.5rem;
+        padding: 1rem;
+      }
+      .title-overlay h1 {
+        font-size: 1.5rem;
+      }
+      .title-overlay p {
+        font-size: 1rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .back-button span {
+        font-size: 0.9rem;
+      }
+      .back-button i {
+        font-size: 0.9rem;
+      }
+    }
+    .socials {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      z-index: 1;
+      position: relative;
+      flex-wrap: wrap;
+    }
+    .social-icon {
+      color: #fff;
+      font-size: 1.2rem;
+      width: 42px;
+      height: 42px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .social-icon:hover {
+      background: #fff;
+      color: #000;
+      transform: translateY(-2px);
+    }
+    .back-button {
+      position: absolute;
+      top: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      text-decoration: none;
+      z-index: 10;
+    }
+    .back-button-content {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      padding: 0.8rem 1.2rem;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .back-button:hover .back-button-content {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .back-button i {
+      font-size: 1rem;
+    }
+    .back-button span {
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="lang-switcher">
+      <button class="lang-btn" onclick="changeLang('en')">English</button>
+      <button class="lang-btn" onclick="changeLang('zh')">中文</button>
+      <button class="lang-btn" onclick="changeLang('jp')">日本語</button>
+    </div>
+
+    <div class="hero">
+      <a href="index.html" class="back-button">
+        <div class="back-button-content">
+          <i class="fas fa-arrow-left"></i>
+          <span data-i18n="back">Back to Home</span>
+        </div>
+      </a>
+      <div class="title-overlay">
+        <h1 data-i18n="title2">Free Guide: 12 Lessons to Jumpstart Your AI Journey</h1>
+      </div>
+    </div>
+
+    <div class="form-container">
+      <form id="subscribeForm" onsubmit="return handleSubmit(event)">
+        <div class="form-group">
+          <label for="name" data-i18n="name">Name</label>
+          <input type="text" id="name" name="entry.1190984922" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email" data-i18n="email">Email</label>
+          <input type="email" id="email" name="entry.444037094" required>
+        </div>
+
+        <div class="form-group">
+          <label for="language" data-i18n="language">Preferred Language</label>
+          <select id="language" name="entry.1135783397" required>
+            <option value="English">English</option>
+            <option value="中文">中文</option>
+            <option value="日本語">日本語</option>
+          </select>
+        </div>
+
+        <button type="submit" class="button" data-i18n="submit">Subscribe Now</button>
+      </form>
+    </div>
+
+    <iframe name="hidden_iframe" style="display:none;"></iframe>
+
+    <div class="socials">
+      <!-- 社群 icon 省略 -->
+    </div>
+
+    <div class="footer-contact">
+      <i class="fas fa-envelope"></i>
+      <span data-i18n="contact">Feel free to contact me via email</span>
+      <a href="mailto:oversurpa@gmail.com">oversurpa@gmail.com</a>
+    </div>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        name: "Name",
+        email: "Email",
+        language: "Preferred Language",
+        select: "Select language",
+        submit: "Subscribe Now",
+        contact: "Feel free to contact me via email",
+        back: "Back to Home",
+        title2: "Free Guide: 12 Lessons to Jumpstart Your AI Journey",
+        desc2: "Get my 12-lesson starter pack (worth $39) and see how creators, solo founders, and marketers are leveling up — free for a limited time."
+      },
+      zh: {
+        name: "姓名",
+        email: "電子郵件",
+        language: "語言偏好",
+        select: "請選擇語言",
+        submit: "立即訂閱",
+        contact: "歡迎來信洽談合作",
+        back: "返回首頁",
+        title2: "限時免費：AI 入門必修的12 堂課",
+        desc2: "價值 $39 的 AI 實戰課程，幫助你有效入門、打好基礎，適合創作者與開發者，目前免費提供。"
+      },
+      jp: {
+        name: "お名前",
+        email: "メールアドレス",
+        language: "希望言語",
+        select: "言語を選択",
+        submit: "登録する",
+        contact: "ご連絡はメールにてお気軽にどうぞ",
+        back: "ホームに戻る",
+        title2: "無料ガイド：AIの基礎を学ぶ12のレッスン",
+        desc2: "通常価格$39の入門レッスンを、期間限定で無料提供中。クリエイターや個人開発者に最適です。"
+      }
+    };
+
+    function changeLang(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          if (el.tagName === 'INPUT' || el.tagName === 'OPTION') {
+            el.placeholder = translations[lang][key];
+          } else {
+            el.innerText = translations[lang][key];
+          }
+        }
+      });
+    }
+
+    async function handleSubmit(event) {
+      event.preventDefault();
+      
+      const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdYMxuD9F-oENo5xZgTPV-TmVyrJ9WKG5siI6Ez50QFqMrOdw/formResponse';
+      
+      const formData = new FormData(event.target);
+      
+      try {
+        await fetch(googleFormUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: formData
+        });
+      } catch (error) {
+        console.log('Submission error:', error);
+      } finally {
+        const currentLang = document.documentElement.lang || 'en';
+        const messages = {
+          'en': 'Thank you for subscribing! You will receive the guide via email shortly.',
+          'zh': '感謝訂閱！指南將很快通過電子郵件發送給您。',
+          'jp': 'ご登録ありがとうございます！ガイドを間もなくメールにてお送りいたします。'
+        };
+        
+        const message = messages[currentLang] || messages['en'];
+        
+        alert(message);
+        event.target.reset();
+      }
+      
+      return false;
+    }
+  </script>
+</body>
+</html> 
