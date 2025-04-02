@@ -286,6 +286,7 @@
         <div class="form-group">
           <label for="language" data-i18n="language">Preferred Language</label>
           <select id="language" name="entry.1135783397" required>
+            <option value="English" data-i18n="select">Select language</option>
             <option value="English">English</option>
             <option value="中文">中文</option>
             <option value="日本語">日本語</option>
@@ -299,7 +300,30 @@
     <iframe name="hidden_iframe" style="display:none;"></iframe>
 
     <div class="socials">
-      <!-- 社群 icon 省略 -->
+      <a href="https://walterzenggit.github.io/walter_tokyo/" target="_blank" class="social-icon">
+        <i class="fas fa-home"></i>
+      </a>
+      <a href="https://www.tiktok.com/@walter_tokyo" target="_blank" class="social-icon">
+        <i class="fab fa-tiktok"></i>
+      </a>
+      <a href="https://www.facebook.com/waltertokyoai" target="_blank" class="social-icon">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://www.instagram.com/walter_tokyo" target="_blank" class="social-icon">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://youtube.com/@walter_tokyo" target="_blank" class="social-icon">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a href="https://www.threads.net/@walter_tokyo" target="_blank" class="social-icon">
+        <i class="fa-brands fa-threads"></i>
+      </a>
+      <a href="https://x.com/walter_tokyo" target="_blank" class="social-icon">
+        <i class="fa-brands fa-x-twitter"></i>
+      </a>
+      <a href="https://github.com/WalterZengGit" target="_blank" class="social-icon">
+        <i class="fab fa-github"></i>
+      </a>
     </div>
 
     <div class="footer-contact">
@@ -347,6 +371,8 @@
     };
 
     function changeLang(lang) {
+      document.documentElement.lang = lang; // 設置當前語言
+      
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (translations[lang] && translations[lang][key]) {
@@ -357,6 +383,15 @@
           }
         }
       });
+
+      // 更新語言選擇下拉選單的選項
+      const languageSelect = document.getElementById('language');
+      languageSelect.innerHTML = `
+        <option value="" data-i18n="select">${translations[lang].select}</option>
+        <option value="English">English</option>
+        <option value="中文">中文</option>
+        <option value="日本語">日本語</option>
+      `;
     }
 
     async function handleSubmit(event) {
@@ -375,16 +410,24 @@
       } catch (error) {
         console.log('Submission error:', error);
       } finally {
-        const currentLang = document.documentElement.lang || 'en';
+        // 根據表單選擇的語言顯示訊息
+        const selectedLanguage = document.getElementById('language').value;
+        let messageLang = 'en';
+        
+        // 根據選擇的語言值判斷要使用哪種語言的訊息
+        if (selectedLanguage === '中文') {
+          messageLang = 'zh';
+        } else if (selectedLanguage === '日本語') {
+          messageLang = 'jp';
+        }
+        
         const messages = {
           'en': 'Thank you for subscribing! You will receive the guide via email shortly.',
           'zh': '感謝訂閱！指南將很快通過電子郵件發送給您。',
           'jp': 'ご登録ありがとうございます！ガイドを間もなくメールにてお送りいたします。'
         };
         
-        const message = messages[currentLang] || messages['en'];
-        
-        alert(message);
+        alert(messages[messageLang]);
         event.target.reset();
       }
       
